@@ -1,0 +1,76 @@
+studentnum = []
+name = []
+c_score = []
+eng_score = []
+python_score = []
+average_score = []
+total_score = []
+grade = []
+rank_list = []
+
+# 학점 계산 함수
+def calculate_grade(score):
+  if score >= 90:
+    return 'A'
+  elif 80 <= score < 90:
+    return 'B'
+  elif 70 <= score < 80:
+    return 'C'
+  elif 60 <= score < 70:
+    return 'D'
+  else:
+    return 'F'
+
+
+def inputs():
+  for _ in range(5):
+    studentnum.append(input("학번: "))
+    name.append(input("이름: "))
+    eng_score.append(int(input("영어: ")))
+    c_score.append(int(input("C언어: ")))
+    python_score.append(int(input("파이썬: ")))
+
+def total_average():
+  for i in range(0,5,1):
+    total_score.append(c_score[i] + eng_score[i] + python_score[i])
+    average_score.append(total_score[i] / 3)
+
+
+def find_rank():
+  rank=1
+  for i in range(0, 5, 1):
+    rank = 1
+    for j in range(0, 5, 1):
+      if average_score[i] < average_score[j]:
+         rank += 1
+      rank_list.append(rank)
+
+
+def print_results():
+  print(
+    "\n=============================================================================\n"
+  )
+  print("학번 \t\t이름 \t\t영어    C-언어   파이썬   총점   평균  학점  등수")
+  print(
+    "\n=============================================================================\n"
+  )
+
+  for i in range(0, 5, 1):
+      print(studentnum[i], "\t", name[i], "\t", eng_score[i], "     ", c_score[i],
+        "     ", python_score[i], "    ", "%.0f" % total_score[i], "  ",
+        "%.0f" % average_score[i], "   ", grade[i], "   ", rank_list[i])
+
+
+# 함수 실행
+inputs()
+total_average()
+
+for j in range(0,5,1):
+    grade.append(calculate_grade(average_score[j]))
+
+find_rank()
+print_results()
+
+
+
+
